@@ -1,0 +1,26 @@
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Select deployment environment"
+        required: true
+        type: choice
+        options:
+          - dev
+          - stage
+          - prod
+
+      version:
+        description: "Docker image tag to deploy"
+        required: true
+        default: "latest"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print inputs
+        run: |
+          echo "Deploying to ${{inputs.environment }}"
+          echo "Version: ${{inputs.version }}"
